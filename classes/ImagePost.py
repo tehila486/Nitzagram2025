@@ -4,7 +4,7 @@ from constants import *
 from helpers import screen
 from Post import Post
 
-# donedeeee
+# donedeeeee
 class ImagePost(Post):
     def __init__(self, username,location,description, img_src):
         super().__init__(username,location,description)
