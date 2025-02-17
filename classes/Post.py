@@ -2,6 +2,7 @@ import pygame
 
 from constants import *
 from helpers import screen
+from Comment import Comment
 
 
 class Post:
@@ -15,12 +16,13 @@ class Post:
         self.description = description
         self.likes_counter = 0
         self.comments = []
+        self.comment_display_index = 0
 
     def add_like(self):
         self.likes_counter += 1
 
     def add_comments(self, text):
-        self.comments.append(text)
+        self.comments.append(Comment(text))
 
     def display(self):
         """
@@ -50,11 +52,11 @@ class Post:
         text = font.render(self.username, True, BLACK)
         screen.blit(text, [USER_NAME_X_POS, USER_NAME_Y_POS])
 
-        # same for location
+        # same for location description
 
     def display_likes(self):
         font = pygame.font.SysFont('chalkduster.ttf', UI_FONT_SIZE)
-        text = font.render(str(self.likes_counter), True, BLACK)
+        text = font.render("Liked by " + str(self.likes_counter) + " users", True, BLACK)
         screen.blit(text, [LIKE_TEXT_X_POS, LIKE_TEXT_Y_POS])
         #font1 = pygame.font.SysFont('chalkduster.ttf', UI_FONT_SIZE)
         # text1 = font.render(str('500'), True, BLACK)
@@ -91,3 +93,6 @@ class Post:
             position_index += 1
             if i >= NUM_OF_COMMENTS_TO_DISPLAY - 1:
                 break
+    def view_more_comments(self):
+        pass
+
