@@ -8,16 +8,19 @@ class Post:
     """
     A class used to represent post on Nitzagram
     """
-    def __init__(self,username,location,description):
-        self.username=username
-        self.location=location
-        self.description=description
+
+    def __init__(self, username, location, description):
+        self.username = username
+        self.location = location
+        self.description = description
         self.likes_counter = 0
         self.comments = []
+
     def add_like(self):
-        self.likes_counter+=1
-    def add_comments(self,text):
-        self.comments.append(Comment(text))
+        self.likes_counter += 1
+
+    def add_comments(self, text):
+        self.comments.append(text)
 
     def display(self):
         """
@@ -34,13 +37,28 @@ class Post:
 
     def display_content(self):
         # here leave it like that and override it in ImagePost and TextPost
+        # screen_size = (WINDOW_WIDTH, WINDOW_HEIGHT)
+        # scrren = pygame.display.set_mode(screen_size)
+        # img = pygame.image.load('images/background.png')
+        # img = pygame.transform.scale(img, (WINDOW_WIDTH, WINDOW_HEIGHT))
+        # screen.blit(img, POST_X_POS, POST_Y_POS)
         pass
 
     def display_header(self):
-        pass
+        # display username and location
+        font = pygame.font.SysFont('chalkduster.ttf', UI_FONT_SIZE)
+        text = font.render(self.username, True, BLACK)
+        screen.blit(text, [USER_NAME_X_POS, USER_NAME_Y_POS])
+
+        # same for location
 
     def display_likes(self):
-        pass
+        font = pygame.font.SysFont('chalkduster.ttf', UI_FONT_SIZE)
+        text = font.render(str(self.likes_counter), True, BLACK)
+        screen.blit(text, [LIKE_TEXT_X_POS, LIKE_TEXT_Y_POS])
+        #font1 = pygame.font.SysFont('chalkduster.ttf', UI_FONT_SIZE)
+        # text1 = font.render(str('500'), True, BLACK)
+        # screen.blit(text1, [SHARE_BUTTON_X_POST, SHARE_BUTTON_Y_POS])
 
     def display_comments(self):
         """
@@ -49,6 +67,12 @@ class Post:
 
         :return: None
         """
+        """
+                Display comments on post. In case there are more than 4
+                comments, show only 4 comments chosen by reset_comments_display_index
+
+                :return: None
+                """
         position_index = self.comments_display_index
         # If there are more than 4 comments, print "view more comments"
         if len(self.comments) > NUM_OF_COMMENTS_TO_DISPLAY:
@@ -67,6 +91,3 @@ class Post:
             position_index += 1
             if i >= NUM_OF_COMMENTS_TO_DISPLAY - 1:
                 break
-
-
-
